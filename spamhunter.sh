@@ -13,9 +13,11 @@ do
         for listed in "${owned_ip_address[@]}"
         do
                 if [[ "$hunt" == "$listed" ]];then
-                        echo "önceki kayıt tespit edildi: $listed"
+                        echo "önceki kayıt tespit edildi: $listed" >> /home/burak/shlogs/logs
                 else
-                        echo "yeni kayıt bulundu : $hunt"
+                        echo "yeni kayıt bulundu : $hunt" >> /home/burak/shlogs/logs
+                        iptables -A INPUT -s $hunt -j DROP
+
                 fi
         done
 done
